@@ -1,0 +1,208 @@
+﻿<Page
+    x:Class="POS.Views.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:helpers="using:POS.Helpers"
+    xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"  xmlns:models="using:POS.Core.ViewModels"
+    xmlns:xaml="using:Microsoft.UI.Xaml"
+    mc:Ignorable="d">
+    <!--<Page.Resources>
+        <helpers:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </Page.Resources>-->
+    <Grid Padding="0,0,0,0" x:Name="ContentArea">
+        <Grid  x:Name="MainGridsProcess">
+            <TextBlock Margin="0,20,0,0" FontSize="20" FontWeight="SemiBold" Text="Data Processing ..........."></TextBlock>
+
+        </Grid>
+        <Grid x:Name="MainGrids">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Padding="0,0,0,0">
+                    <TextBlock Margin="0,20,0,0" FontSize="30" FontWeight="SemiBold" Text="Settings"></TextBlock>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="8*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <TextBox HorizontalAlignment="Left" Name="App_Url" Width="300" Height="30" PlaceholderText="App Url" /> <!--KeyUp="Check_Url"-->
+                    </Grid>
+                    <Grid Grid.Column="1" Padding="5,0,0,0">
+                        <Button x:Name="btnCheck" HorizontalAlignment="Left" Background="#0A8080" Foreground="White" Content="Check" Click="check" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="2" Background="White">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Device ID :"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <TextBlock x:Name="DeviceId" x:DefaultBindMode="OneWay" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{x:Bind ViewModel.df.DeviceId}"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="MAC Address :"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <TextBlock x:Name="MacId" x:DefaultBindMode="OneWay" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" Text="{x:Bind ViewModel.df.DeviceMac}"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Account"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox  x:Name="cmbAccount" IsTextSearchEnabled="True" ItemsSource="{x:Bind ViewModel.accountList}" SelectedItem="{x:Bind ViewModel.selectedAccount,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Account"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState" SelectionChanged="Account_SelectionChanged" >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock  Text="{Binding AccountName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+
+                            <!--<ComboBox IsTextSearchEnabled="True" ItemsSource="{x:Bind ViewModel.accountList}" SelectedItem="{x:Bind ViewModel.selectedBranch,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Account"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState"  >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock  Text="{Binding AccountName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>
+                            </ComboBox>-->
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Branch"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox x:Name="cmbBranch" IsTextSearchEnabled="True"  ItemsSource="{x:Bind ViewModel.branchLists}" SelectedItem="{x:Bind ViewModel.selectedBranch,Mode=TwoWay}"  HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Branch"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState" SelectionChanged="cmbBranch_SelectionChanged" >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock  Text="{Binding BranchName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Office"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox x:Name="cmbOffice" IsTextSearchEnabled="True" ItemsSource="{x:Bind ViewModel.OfficeLists}" SelectedItem="{x:Bind ViewModel.selectedOffice,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Office"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState" SelectionChanged="cmbOffice_SelectionChanged" >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock Text="{Binding OfficeName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Warehouse"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox x:Name="cmbWarehouse" IsTextSearchEnabled="True" ItemsSource="{x:Bind ViewModel.warehouseLists}" SelectedItem="{x:Bind ViewModel.selectedWarehouse,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Warehouse"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState" SelectionChanged="cmbWarehouse_SelectionChanged" >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock Text="{Binding WarehouseName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Counter"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <ComboBox x:Name="cmbCounter" IsTextSearchEnabled="True" ItemsSource="{x:Bind ViewModel.counterLists}" SelectedItem="{x:Bind ViewModel.selectedCounter,Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" PlaceholderText="Select Counter"  MinWidth="200" Width="200"                                         RelativePanel.Below="cmbState" >
+                                <ComboBox.ItemTemplate>                                    <DataTemplate>                                        <StackPanel Orientation="Horizontal">                                            <TextBlock Text="{Binding CounterName}" TextAlignment="Right"/>                                        </StackPanel>                                    </DataTemplate>                                </ComboBox.ItemTemplate>                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="SQLConnection"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <PasswordBox x:Name="SQLConn" Height="30" Width="500" HorizontalAlignment="Left"></PasswordBox>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Offline Connection"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <CheckBox x:Name="OffConnection" IsChecked="{x:Bind ViewModel.df.OflineConnection}"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Padding="20,0,0,0">
+                            <TextBlock VerticalAlignment="Center" FontSize="18" FontWeight="Bold" Text="Is Sync"/>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <CheckBox x:Name="IsSync" IsChecked="{x:Bind ViewModel.df.IsSync}"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="10" Padding="20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" HorizontalAlignment="Left"  Background="#0A8080" Foreground="White" Content="Save" Click="SaveSetting">
+
+                        </Button>
+                        <Button  Grid.Column="1"  x:Name="btnLogOut" HorizontalAlignment="Right"  Background="#0A8080" Foreground="White" Content="Log Out" Click="btnLogOut_Click">
+
+                        </Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

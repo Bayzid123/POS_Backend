@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>POS</RootNamespace>
+    <Platforms>x86;x64;arm64</Platforms>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <PublishProfile>Properties\PublishProfiles\win10-$(Platform).pubxml</PublishProfile>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<!--<Nullable>enable</Nullable>-->
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <NullableReferenceTypes>true</NullableReferenceTypes>
+	<UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>D:\Samiur\Deploy\POS\</AppxPackageDir>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Never</AppxBundle>
+    <AppInstallerUri>C:\POS</AppInstallerUri>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <PackageCertificateThumbprint>DC7C9D0CC0C0C81EFDDA5C5FE05C00420C6C2330</PackageCertificateThumbprint>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <ApplicationIcon>Assets\managerium_logo.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="DS\LocalSource.Designer.cs" />
+    <Compile Remove="DS\RPTInvoice.Designer.cs" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <Content Remove="Assets\About.jpg" />
+  </ItemGroup>-->
+   
+  <!--<ItemGroup>
+    <Content Remove="Assets\fre3of9x.ttf" />
+  </ItemGroup>-->
+  <ItemGroup>
+    <!--<None Remove="Assets\RDLC\rptInvoiceRePrint.rdlc" />-->
+    <!--<None Remove="Assets\RDLC\rptPrint.rdlc" />-->
+    <None Remove="DS\LocalSource.xsc" />
+    <None Remove="DS\LocalSource.xsd" />
+    <None Remove="DS\LocalSource.xss" />
+    <None Remove="DS\RPTInvoice.xsc" />
+    <None Remove="DS\RPTInvoice.xsd" />
+    <None Remove="DS\RPTInvoice.xss" />
+    <None Remove="Views\SalesInvoice\InvoiceView.xaml" />
+  </ItemGroup>
+  <!--<ItemGroup>
+    <Content Remove="Assets\Image20230317170324.jpg" />
+  </ItemGroup>-->
+  <!--<ItemGroup>
+    <Content Remove="Assets\RDLC\ReportDemo.rdlc" />
+    <Content Remove="Assets\RDLC\rptInvoice.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\StoreLogo.scale-100.png" />
+    <None Remove="Assets\StoreLogo.scale-125.png" />
+    <None Remove="Assets\StoreLogo.scale-150.png" />
+    <None Remove="Views\SalesInvoice\InvoicePage.xaml" />
+  </ItemGroup>-->
+
+
+
+  <ItemGroup>
+    <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.3" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
+    <PackageReference Include="Pdfium.Net.SDK" Version="4.80.2704" />
+    <PackageReference Include="PdfiumViewer" Version="2.13.0" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.17" />
+    <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    <PackageReference Include="WinUIEx" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\POS.Core\POS.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Page Update="Views\SalesInvoice\InvoiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\SalesInvoice\InvoicePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\LogIn\LogInPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DS\" />
+    <Folder Include="Views\About\" />
+    <Folder Include="Views\Session\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BarcodeLib">
+      <HintPath>..\BarcodeLib\BarcodeLib\bin\Debug\net6.0\BarcodeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+</Project>
